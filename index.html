@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Web Workers basic example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="timer" style="margin-bottom: 10px;">
+        <span>Time: {{time}}</span>
+        <button @click="time = 0">歸零</button>
+      </div>
+      <div>
+        <input type="number" v-model="value">
+        <button @click="workersCount">Workers程線計算</button>
+        <span v-if="output != ''">結果：{{output}}<button @click="output = ''">clean</button></span>
+      </div>
+      <div>
+          <input type="number" v-model="value1">
+          <button @click="mainCount">主線程線計算</button>
+          <span v-if="output1 != ''">結果：{{output1}}<button @click="output1 = ''">clean</button></span>
+        </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

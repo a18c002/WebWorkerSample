@@ -1,0 +1,42 @@
+<html lang="zh-TW">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<style>
+	div {
+		border: solid 2px #336699;
+		margin: 10px;
+		padding: 5px;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		vertical-align: top;
+		text-align: center;
+		display: inline-block;
+	}
+	#panel {
+		width: 400px;
+		background: #AACCEE;
+		text-align: left;
+		font-size: 10pt;
+		display: block;
+	}
+</style>
+
+
+<div><form id="form"><input type="text" id="msg"></form></div>
+<div>Chat Messages<div id="panel"></div></div>
+
+
+<script>
+var shared = new SharedWorker('test646.js', 'chat');
+var form = document.getElementById('form');
+form.onsubmit = function(e) {
+	e.preventDefault();
+	var msg = document.getElementById('msg');
+	shared.port.postMessage(msg.value);
+	msg.value = '';
+	return false;
+}
+shared.port.onmessage = function(e) {
+	document.getElementById('panel').innerHTML += '<li>' + e.data + '</li>';
+}
+</script>
